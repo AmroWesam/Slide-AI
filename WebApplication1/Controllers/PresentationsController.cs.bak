@@ -1,0 +1,120 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using WebApplication1.Services;
+
+namespace WebApplication1.Controllers
+{
+    public class PresentationsController : Controller
+    {
+        private readonly IWebHostEnvironment _environment;
+        private readonly PythonService _pythonService;
+
+        public PresentationsController(IWebHostEnvironment environment, PythonService pythonService)
+        {
+            _environment = environment;
+            _pythonService = pythonService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                TempData["ErrorMessage"] = "لم يتم اختيار ملف";
+                return RedirectToAction("Presentations", "Home");
+            }
+
+            try
+            {
+                // التأكد من وجود المجلد
+                string pythonPresentationFolder = @"C:\Smart Control Techniques\Presentation";
+                if (!Directory.Exists(pythonPresentationFolder))
+                {
+                    Directory.CreateDirectory(pythonPresentationFolder);
+                }
+
+                // حفظ الملف مباشرة في مجلد مشروع Python
+                string destinationFilePath = Path.Combine(pythonPresentationFolder, file.FileName);
+                using (var stream = new FileStream(destinationFilePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // تشغيل سكربت تحويل البوربوينت إلى صور
+                string pythonScriptPath = @"C:\Smart Control Techniques\convert.py";
+                
+                // التحقق من وجود السكربت وإنشائه إذا لم يكن موجودًا
+                if (!System.IO.File.Exists(pythonScriptPath))
+                {
+                    CreatePythonConversionScript(pythonScriptPath);
+                }
+                
+                string output = await _pythonService.ExecutePythonScriptAsync(Path.GetFileName(pythonScriptPath));
+
+                TempData["SuccessMessage"] = "تم رفع ملف العرض التقديمي وتحويله إلى صور بنجاح";
+                return RedirectToAction("Presentations", "Home");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"حدث خطأ: {ex.Message}";
+                return RedirectToAction("Presentations", "Home");
+            }
+        }
+
+        private void CreatePythonConversionScript(string scriptPath)
+        {
+            string scriptContent = @"import os
+import sys
+import glob
+from comtypes import client
+import time
+
+def convert_pptx_to_images():
+    # العثور على أول ملف PowerPoint في المجلد
+    presentation_dir = os.path.join(os.path.dirname(__file__), ""Presentation"")
+    if not os.path.exists(presentation_dir):
+        print(""Error: Presentation directory does not exist!"")
+        return
+    
+    pptx_files = glob.glob(os.path.join(presentation_dir, ""*.pptx""))
+    if not pptx_files:
+        pptx_files = glob.glob(os.path.join(presentation_dir, ""*.ppt""))
+        if not pptx_files:
+            print(""Error: No PowerPoint files found in directory!"")
+            return
+    
+    pptx_file = pptx_files[0]
+    print(f""Converting: {pptx_file}"")
+    
+    # تحويل العرض التقديمي إلى صور باستخدام PowerPoint COM
+    try:
+        powerpoint = client.CreateObject(""PowerPoint.Application"")
+        powerpoint.Visible = True
+        
+        presentation = powerpoint.Presentations.Open(pptx_file)
+        
+        # حفظ كل شريحة كصورة
+        for i in range(1, presentation.Slides.Count + 1):
+            image_path = os.path.join(presentation_dir, f""slide_{i:03d}.jpg"")
+            presentation.Slides(i).Export(image_path, ""JPG"")
+            print(f""Saved slide {i} to {image_path}"")
+        
+        presentation.Close()
+        powerpoint.Quit()
+        
+        print(""Conversion complete!"")
+        return True
+    except Exception as e:
+        print(f""Error during conversion: {e}"")
+        return False
+
+if __name__ == ""__main__"":
+    convert_pptx_to_images()
+";
+            System.IO.File.WriteAllText(scriptPath, scriptContent);
+        }
+    }
+}

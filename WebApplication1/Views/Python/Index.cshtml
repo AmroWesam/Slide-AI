@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Python Integration";
+}
+
+<div class="container mt-4">
+    <h1>Python Integration</h1>
+    <p class="lead">This page demonstrates how to call Python scripts from ASP.NET Core.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Run Python Scripts</h5>
+                </div>
+                <div class="card-body">
+                    <p>Execute Python scripts and view the results immediately.</p>
+                    <a asp-action="RunApiScript" class="btn btn-outline-primary">Run API Script</a>
+                    <a asp-action="RunMainScript" class="btn btn-outline-primary ml-2">Run Main Script</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Start Python Processes</h5>
+                </div>
+                <div class="card-body">
+                    <p>Start Python scripts as separate processes.</p>
+                    <a asp-action="StartApiServer" class="btn btn-outline-success">Start API Server</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Python Project Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Project Path:</strong> C:\Smart Control Techniques</p>
+                    <p><strong>Available Scripts:</strong></p>
+                    <ul>
+                        <li><strong>api.py</strong> - Python API script</li>
+                        <li><strong>main.py</strong> - Main Python script</li>
+                        <li><strong>requirements.txt</strong> - Python dependencies</li>
+                        <li><strong>start_api_server.bat</strong> - Batch file to start the API server</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

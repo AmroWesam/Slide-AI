@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Python Message";
+}
+
+<div class="container mt-4">
+    <h1>Python Process Status</h1>
+    
+    <div class="card mt-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Status Message</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-outline-primary">Back to Python Integration</a>
+        </div>
+    </div>
+</div>

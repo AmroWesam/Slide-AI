@@ -1,0 +1,252 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideCraft Pro - Presentation Viewer</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/presentation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="/js/presentation.js" defer></script>
+</head>
+<body class="presentation-viewer-body">
+    <div class="presentation-controls">
+        <div class="control-bar">
+            <button id="exit-presentation" class="control-btn"><i class="fas fa-times"></i> Exit</button>
+            <div class="slide-info">
+                <span id="current-slide">1</span> / <span id="total-slides">25</span>
+            </div>
+            <div class="control-actions">
+                <button id="toggle-gesture" class="control-btn active"><i class="fas fa-hand-paper"></i> Gesture Control</button>
+                <button id="toggle-voice" class="control-btn active"><i class="fas fa-microphone-alt"></i> Voice Control</button>
+                <button id="toggle-fullscreen" class="control-btn"><i class="fas fa-expand"></i></button>
+            </div>
+        </div>
+        <div class="gesture-status">
+            <div id="gesture-indicator" class="active">
+                <i class="fas fa-hand-paper"></i> Gesture Recognition Active
+            </div>
+            <div id="voice-indicator" class="active">
+                <i class="fas fa-microphone-alt"></i> Voice Recognition Active
+            </div>
+            <div id="command-feedback">
+                <span id="last-command"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="presentation-container">
+        <div id="camera-feed-container">
+            <video id="camera-feed" autoplay muted></video>
+            <div class="gesture-guide">
+                <div class="gesture-item">
+                    <div class="gesture-icon swipe-right"></div>
+                    <span>Swipe Right: Previous Slide</span>
+                </div>
+                <div class="gesture-item">
+                    <div class="gesture-icon swipe-left"></div>
+                    <span>Swipe Left: Next Slide</span>
+                </div>
+                <div class="gesture-item">
+                    <div class="gesture-icon pinch"></div>
+                    <span>Pinch: Zoom In/Out</span>
+                </div>
+                <div class="gesture-item">
+                    <div class="gesture-icon point"></div>
+                    <span>Point: Highlight</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-container">
+            <div class="slide current-slide">
+                <img src="https://via.placeholder.com/1600x900?text=Slide+1" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/1600x900?text=Slide+2" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/1600x900?text=Slide+3" alt="Slide 3">
+            </div>
+            <div id="pointer-highlight" class="hidden"></div>
+        </div>
+
+        <div class="presentation-navigation">
+            <button id="prev-slide" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <button id="next-slide" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="voice-commands-panel" class="side-panel">
+        <div class="panel-header">
+            <h3>Voice Commands</h3>
+            <button class="close-panel"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="panel-content">
+            <ul class="commands-list">
+                <li><strong>"Next slide"</strong> - Move to the next slide</li>
+                <li><strong>"Previous slide"</strong> - Move to the previous slide</li>
+                <li><strong>"First slide"</strong> - Jump to the first slide</li>
+                <li><strong>"Last slide"</strong> - Jump to the last slide</li>
+                <li><strong>"Slide [number]"</strong> - Jump to a specific slide</li>
+                <li><strong>"Zoom in"</strong> - Enlarge current slide</li>
+                <li><strong>"Zoom out"</strong> - Reduce current slide size</li>
+                <li><strong>"Reset zoom"</strong> - Return to default size</li>
+                <li><strong>"Highlight [area]"</strong> - Highlight a specific area</li>
+                <li><strong>"End presentation"</strong> - Exit presentation mode</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="presentation-end-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Presentation Complete</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="presentation-summary">
+                    <h3>Presentation Summary</h3>
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="stat-value">15:24</div>
+                            <div class="stat-label">Duration</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Audience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-hand-paper"></i></div>
+                            <div class="stat-value">18</div>
+                            <div class="stat-label">Gestures Used</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-microphone-alt"></i></div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Voice Commands</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-analysis">
+                    <h3>AI Performance Analysis</h3>
+                    <div class="analysis-metrics">
+                        <div class="metric">
+                            <label>Speaker Confidence</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="percentage">85%</span>
+                        </div>
+                        <div class="metric">
+                            <label>Gesture Accuracy</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="percentage">78%</span>
+                        </div>
+                        <div class="metric">
+                            <label>Pacing</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="percentage">92%</span>
+                        </div>
+                        <div class="metric">
+                            <label>Audience Engagement</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="percentage">88%</span>
+                        </div>
+                    </div>
+                    <div class="analysis-insights">
+                        <h4>Performance Insights</h4>
+                        <ul>
+                            <li>Excellent pacing throughout your presentation</li>
+                            <li>Gestures were mostly accurate, with room for improvement on pinch controls</li>
+                            <li>Voice command recognition was highly accurate</li>
+                            <li>Audience engagement was strong in the middle sections</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feedback-collection">
+                    <h3>Collect Audience Feedback</h3>
+                    <p>Share the following link with your audience to collect their feedback:</p>
+                    <div class="feedback-link">
+                        <input type="text" value="https://smart-education.com/feedback/p78k9d2" readonly>
+                        <button class="copy-link"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <div class="qr-code-container">
+                        <div class="qr-code">
+                            <img src="https://via.placeholder.com/150?text=QR+Code" alt="Feedback QR Code">
+                        </div>
+                        <div class="qr-info">
+                            <p>Scan with a QR code reader to access the feedback form</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn primary view-detailed-analytics">View Detailed Analytics</button>
+                <button class="btn secondary return-to-dashboard">Return to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gesture-tutorial-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Gesture Controls Tutorial</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tutorial-content">
+                    <div class="tutorial-step active">
+                        <h3>Step 1: Position Yourself</h3>
+                        <div class="tutorial-image">
+                            <img src="https://via.placeholder.com/600x400?text=Position+Tutorial" alt="Position Tutorial">
+                        </div>
+                        <p>Position yourself in front of the camera so your hands are clearly visible. The ideal distance is about 1-2 feet from the camera.</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <h3>Step 2: Basic Navigation Gestures</h3>
+                        <div class="tutorial-image">
+                            <img src="https://via.placeholder.com/600x400?text=Navigation+Tutorial" alt="Navigation Tutorial">
+                        </div>
+                        <p>Learn the basic navigation gestures: swipe left for next slide, swipe right for previous slide.</p>
+                    </div>
+                    <div class="tutorial-step">
+                        <h3>Step 3: Advanced Gestures</h3>
+                        <div class="tutorial-image">
+                            <img src="https://via.placeholder.com/600x400?text=Advanced+Tutorial" alt="Advanced Tutorial">
+                        </div>
+                        <p>Practice advanced gestures like pinch to zoom and pointing to highlight areas of your slides.</p>
+                    </div>
+                </div>
+                <div class="tutorial-navigation">
+                    <button class="tutorial-nav prev-step"><i class="fas fa-chevron-left"></i> Previous</button>
+                    <div class="tutorial-progress">
+                        <span class="progress-dot active"></span>
+                        <span class="progress-dot"></span>
+                        <span class="progress-dot"></span>
+                    </div>
+                    <button class="tutorial-nav next-step">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn primary start-presentation">Start Presentation</button>
+                <button class="btn secondary skip-tutorial">Skip Tutorial</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
