@@ -1,0 +1,15 @@
+Python Integration Information
+
+Python Project Path: C:\Smart Control Techniques
+
+Available Python Files:
+- api.py: Python API script
+- main.py: Main Python script
+- requirements.txt: Python dependencies
+- start_api_server.bat: Batch file to start the API server
+
+How to call Python from C#:
+1. Use System.Diagnostics.Process to start Python process
+2. Provide the full path to the Python executable
+3. Provide the full path to the Python script
+4. Capture output if needed
