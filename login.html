@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Slide AI</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="JS/script.js" defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-file-powerpoint"></i>
+                <h1>Slide AI</h1>
+            </div>
+
+            <form class="login-form" id="loginForm" novalidate>
+                <h2>Welcome Presenters</h2>
+                <p class="subtitle">Access your presentation platform</p>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            placeholder="Enter your email"
+                            aria-describedby="email-error"
+                            autocomplete="email">
+                        <div id="email-error" class="error-message"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            placeholder="Enter your password"
+                            autocomplete="current-password">
+                        <i class="fas fa-eye-slash toggle-password"></i>
+                        <div class="error-message"></div>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember" id="remember">
+                        <span><i class="fas fa-bookmark"></i> Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" role="button">
+                        <i class="fas fa-question-circle"></i> Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-door-open"></i>
+                    <span class="btn-text">Enter Classroom</span>
+                </button>
+
+                <div class="social-login">
+                    <p>Or continue with</p>
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn google" title="Login with Google Classroom">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-btn microsoft" title="Login with Microsoft Teams">
+                            <i class="fab fa-microsoft"></i>
+                        </button>
+                        <button type="button" class="social-btn apple" title="Login with Apple School">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="register-link">
+                    <p><i class="fas fa-user-plus"></i> New to Slide AI? <a href="register.html">Join Now</a></p>
+                </div>
+            </form>
+
+            <div class="back-to-home">
+                <a href="index.html">
+                    <i class="fas fa-school"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

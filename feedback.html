@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide AI - Presentation Feedback</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/presentation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="JS/presentation.js" defer></script>
+</head>
+<body class="feedback-page">
+    <header class="feedback-header">
+        <div class="logo">
+            <h1><i class="fas fa-file-powerpoint"></i> Slide AI</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="feedback-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Presentation Feedback</h2>
+                    <p class="section-subtitle">Your feedback helps presenters improve their skills</p>
+                </div>
+
+                <div class="presentation-details">
+                    <div class="presentation-info">
+                        <h3>AI in Education: Future Trends</h3>
+                        <p class="presenter">by Prof. David Johnson</p>
+                        <p class="presentation-meta">April 20, 2025 • 15:30 - 16:15</p>
+                    </div>
+                </div>
+
+                <form id="feedback-form" class="feedback-form">
+                    <div class="feedback-section-header">
+                        <h3>Content Quality</h3>
+                        <p>Evaluate the quality of the presentation content</p>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Material was well-organized</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="organization-5" name="organization" value="5"><label for="organization-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="organization-4" name="organization" value="4"><label for="organization-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="organization-3" name="organization" value="3"><label for="organization-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="organization-2" name="organization" value="2"><label for="organization-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="organization-1" name="organization" value="1"><label for="organization-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Content was relevant and informative</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="relevance-5" name="relevance" value="5"><label for="relevance-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="relevance-4" name="relevance" value="4"><label for="relevance-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="relevance-3" name="relevance" value="3"><label for="relevance-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="relevance-2" name="relevance" value="2"><label for="relevance-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="relevance-1" name="relevance" value="1"><label for="relevance-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Visual aids enhanced understanding</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="visuals-5" name="visuals" value="5"><label for="visuals-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="visuals-4" name="visuals" value="4"><label for="visuals-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="visuals-3" name="visuals" value="3"><label for="visuals-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="visuals-2" name="visuals" value="2"><label for="visuals-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="visuals-1" name="visuals" value="1"><label for="visuals-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section-header">
+                        <h3>Delivery</h3>
+                        <p>Evaluate the presenter's delivery style</p>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Speaker was clear and easy to understand</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="clarity-5" name="clarity" value="5"><label for="clarity-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="clarity-4" name="clarity" value="4"><label for="clarity-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="clarity-3" name="clarity" value="3"><label for="clarity-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="clarity-2" name="clarity" value="2"><label for="clarity-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="clarity-1" name="clarity" value="1"><label for="clarity-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Gesture control was effective</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="gestures-5" name="gestures" value="5"><label for="gestures-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="gestures-4" name="gestures" value="4"><label for="gestures-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="gestures-3" name="gestures" value="3"><label for="gestures-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="gestures-2" name="gestures" value="2"><label for="gestures-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="gestures-1" name="gestures" value="1"><label for="gestures-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Pacing was appropriate</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="pacing-5" name="pacing" value="5"><label for="pacing-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="pacing-4" name="pacing" value="4"><label for="pacing-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="pacing-3" name="pacing" value="3"><label for="pacing-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="pacing-2" name="pacing" value="2"><label for="pacing-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="pacing-1" name="pacing" value="1"><label for="pacing-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section-header">
+                        <h3>Engagement</h3>
+                        <p>Evaluate how engaging the presentation was</p>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Presentation held my attention</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="attention-5" name="attention" value="5"><label for="attention-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="attention-4" name="attention" value="4"><label for="attention-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="attention-3" name="attention" value="3"><label for="attention-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="attention-2" name="attention" value="2"><label for="attention-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="attention-1" name="attention" value="1"><label for="attention-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <label>Speaker encouraged participation</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="participation-5" name="participation" value="5"><label for="participation-5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="participation-4" name="participation" value="4"><label for="participation-4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="participation-3" name="participation" value="3"><label for="participation-3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="participation-2" name="participation" value="2"><label for="participation-2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="participation-1" name="participation" value="1"><label for="participation-1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section-header">
+                        <h3>Additional Comments</h3>
+                        <p>Provide any additional feedback that might help the presenter improve</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="strengths">What were the strengths of the presentation?</label>
+                        <textarea id="strengths" name="strengths" rows="3" placeholder="Enter strengths here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="improvements">What could be improved?</label>
+                        <textarea id="improvements" name="improvements" rows="3" placeholder="Enter suggestions for improvement here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="other-comments">Any other comments?</label>
+                        <textarea id="other-comments" name="other-comments" rows="3" placeholder="Enter any other comments here..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary submit-feedback">Submit Feedback</button>
+                    </div>
+                </form>
+
+                <div id="feedback-success" class="feedback-success hidden">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Thank You for Your Feedback!</h3>
+                    <p>Your feedback has been submitted successfully and will help the presenter improve their presentation skills.</p>
+                    <div class="success-actions">
+                        <a href="index.html" class="btn secondary">Return to Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="feedback-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Slide AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

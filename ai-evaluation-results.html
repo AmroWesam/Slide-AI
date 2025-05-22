@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideCraft Pro - AI Evaluation Results</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/presentation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/evaluation-results.css">
+    <script src="JS/evaluation.js" defer></script>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --neutral-50: #f9fafb;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #e5e7eb;
+            --neutral-300: #d1d5db;
+            --neutral-400: #9ca3af;
+            --neutral-500: #6b7280;
+            --neutral-600: #4b5563;
+            --neutral-700: #374151;
+            --neutral-800: #1f2937;
+            --neutral-900: #111827;
+        }
+        
+        body.ai-evaluation-body {
+            background-color: var(--neutral-100);
+            color: var(--neutral-800);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styling */
+        .evaluation-header {
+            margin-bottom: 30px;
+        }
+
+        .evaluation-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .evaluation-title h1 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .evaluation-title p {
+            color: var(--neutral-600);
+            font-size: 1.1rem;
+        }
+
+        .presentation-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--neutral-700);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Summary Card Styling */
+        .evaluation-summary {
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .summary-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .overall-score {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+            position: relative;
+            border: 4px solid white;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 2px solid white;
+            opacity: 0.7;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .summary-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .metric {
+            position: relative;
+        }
+
+        .metric label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--neutral-700);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metric label::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .metric:nth-child(1) label::before { background-color: var(--primary-color); }
+        .metric:nth-child(2) label::before { background-color: var(--secondary-color); }
+        .metric:nth-child(3) label::before { background-color: var(--success-color); }
+        .metric:nth-child(4) label::before { background-color: var(--warning-color); }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .confidence { background-color: var(--primary-color); }
+        .gesture { background-color: var(--secondary-color); }
+        .pacing { background-color: var(--success-color); }
+        .engagement { background-color: var(--warning-color); }
+
+        .percentage {
+            text-align: right;
+            display: block;
+            font-weight: 600;
+            color: var(--neutral-700);
+        }
+
+        /* Detailed Analysis Styling */
+        .detailed-analysis {
+            margin-bottom: 40px;
+        }
+
+        .analysis-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--neutral-200);
+            margin-bottom: 20px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .analysis-tabs::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .analysis-tabs::-webkit-scrollbar-thumb {
+            background-color: var(--neutral-300);
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            color: var(--neutral-500);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .tab-panel h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        /* Evaluation Dashboard Styling */
+        .evaluation-dashboard {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .score-dashboard {
+            text-align: center;
+        }
+
+        .final-score-container {
+            margin-bottom: 20px;
+        }
+
+        .final-score-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+        }
+
+        .score-progress {
+            transform: rotate(-90deg);
+        }
+
+        .score-background {
+            fill: none;
+            stroke: var(--neutral-200);
+            stroke-width: 8;
+        }
+
+        .score-value {
+            fill: none;
+            stroke: var(--primary-color);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1.5s ease;
+        }
+
+        .final-score-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .score-max {
+            font-size: 1rem;
+            color: var(--neutral-500);
+        }
+
+        .score-grade-container {
+            text-align: center;
+        }
+
+        .grade {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .grade-label {
+            color: var(--neutral-600);
+            font-weight: 500;
+        }
+
+        .criteria-description p {
+            color: var(--neutral-600);
+            line-height: 1.7;
+        }
+
+        /* Criteria List Styling */
+        .criteria-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .criterion-card {
+            background-color: var(--neutral-50);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .criterion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .criterion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .criterion-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .criterion-title i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .criterion-title h4 {
+            margin: 0;
+            color: var(--neutral-800);
+        }
+
+        .criterion-score {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .criterion-max {
+            color: var(--neutral-500);
+            font-weight: normal;
+        }
+
+        .criterion-meter {
+            margin-bottom: 15px;
+        }
+
+        .criterion-bar {
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .criterion-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        .criterion-details p {
+            color: var(--neutral-600);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .criterion-metrics {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .criterion-metrics li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-top: 1px solid var(--neutral-200);
+        }
+
+        .metric-name {
+            color: var(--neutral-700);
+        }
+
+        .metric-value {
+            font-weight: 500;
+        }
+
+        /* Analysis Grid Styling */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .analysis-card {
+            background-color: var(--neutral-50);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--neutral-100);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .card-header h4 {
+            margin: 0;
+            color: var(--neutral-800);
+            font-size: 1.1rem;
+        }
+
+        .card-header i {
+            color: var(--primary-color);
+        }
+
+        .chart-container {
+            padding: 20px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-container.large {
+            height: 300px;
+        }
+
+        .card-footer {
+            padding: 10px 20px;
+            background-color: var(--neutral-50);
+            border-top: 1px solid var(--neutral-200);
+            color: var(--neutral-700);
+            font-size: 0.9rem;
+        }
+
+        /* Suggestions Styling */
+        .suggestions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .suggestion-card {
+            display: flex;
+            background-color: var(--neutral-50);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .suggestion-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .suggestion-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .suggestion-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .suggestion-content h4 {
+            margin: 0 0 10px;
+            color: var(--neutral-800);
+        }
+
+        .suggestion-content p {
+            color: var(--neutral-600);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .suggestion-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .suggestion-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .evaluation-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .final-score-ring {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .presentation-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .summary-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .criteria-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .evaluation-dashboard {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .summary-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .tab-content {
+                padding: 20px 15px;
+            }
+            
+            .suggestions-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="ai-evaluation-body">
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><i class="fas fa-file-powerpoint"></i> SlideCraft Pro</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="presentations.html">Presentations</a></li>
+                <li><a href="ai-evaluation-results.html" class="active">Evaluation Results</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="login.html" class="login-link"><i class="fas fa-user"></i> Login</a></li>
+                <li><a href="register.html" class="register-link"><i class="fas fa-user-plus"></i> Register</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="evaluation-header">
+            <div class="container">
+                <div class="evaluation-title">
+                    <h1><i class="fas fa-chart-bar"></i> AI Evaluation Results</h1>
+                    <p>Detailed analysis of your presentation performance</p>
+                </div>
+                <div class="presentation-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-file-powerpoint"></i>
+                        <span id="presentation-name">AI in Education</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span id="presentation-date">May 22, 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="presentation-duration">15:24</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span id="audience-count">24</span> attendees
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="evaluation-summary">
+            <div class="container">
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <h2>Performance Overview</h2>
+                        <div class="overall-score">
+                            <div class="score-circle">
+                                <span id="overall-score">85</span>
+                            </div>
+                            <span class="score-label">Overall Score</span>
+                        </div>
+                    </div>
+                    <div class="summary-metrics">
+                        <div class="metric">
+                            <label><i class="fas fa-user-check"></i> Speaker Confidence</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill confidence" style="width: 85%"></div>
+                            </div>
+                            <span class="percentage">85%</span>
+                        </div>
+                        <div class="metric">
+                            <label><i class="fas fa-hand-pointer"></i> Gesture Accuracy</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill gesture" style="width: 78%"></div>
+                            </div>
+                            <span class="percentage">78%</span>
+                        </div>
+                        <div class="metric">
+                            <label><i class="fas fa-tachometer-alt"></i> Pacing</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill pacing" style="width: 92%"></div>
+                            </div>
+                            <span class="percentage">92%</span>
+                        </div>
+                        <div class="metric">
+                            <label><i class="fas fa-users"></i> Audience Engagement</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill engagement" style="width: 88%"></div>
+                            </div>
+                            <span class="percentage">88%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detailed-analysis">
+            <div class="container">
+                <div class="analysis-tabs">
+                    <button class="tab-btn active" data-tab="detailed-evaluation"><i class="fas fa-chart-pie"></i> Detailed Evaluation</button>
+                    <button class="tab-btn" data-tab="gesture-analysis"><i class="fas fa-hand-point-up"></i> Gesture Analysis</button>
+                    <button class="tab-btn" data-tab="voice-analysis"><i class="fas fa-microphone-alt"></i> Voice Analysis</button>
+                    <button class="tab-btn" data-tab="engagement-analysis"><i class="fas fa-users"></i> Audience Engagement</button>
+                    <button class="tab-btn" data-tab="improvement-suggestions"><i class="fas fa-lightbulb"></i> Improvement Tips</button>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Detailed Evaluation Tab -->                    
+                    <div class="tab-panel active" id="detailed-evaluation">
+                        <h3>Comprehensive Presentation Evaluation</h3>
+                        <p class="tab-description">Your presentation has been evaluated based on multiple criteria to provide you with a detailed assessment of your performance. Review the results below to understand your strengths and areas for improvement.</p>
+                        <div class="evaluation-dashboard">
+                            <div class="score-dashboard">
+                                <div class="final-score-container">
+                                    <div class="final-score-ring">
+                                        <svg viewBox="0 0 100 100" class="score-progress">
+                                            <circle cx="50" cy="50" r="45" class="score-background" />
+                                            <circle cx="50" cy="50" r="45" class="score-value" id="score-circle" />
+                                        </svg>
+                                        <div class="final-score-number">
+                                            <span id="final-score">0</span><span class="score-max">/100</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-label">Overall Score</div>
+                                </div>
+                                <div class="score-grade-container">
+                                    <div class="grade" id="score-grade">A</div>
+                                    <div class="grade-label">Grade</div>
+                                </div>
+                            </div>
+                            <div class="criteria-description">
+                                <p>Your presentation has been automatically evaluated based on six key criteria. Each criterion contributes to your final score. Review the detailed breakdown below to understand your strengths and areas for improvement.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="criteria-list">
+                            <!-- Content Quality Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-file-alt"></i>
+                                        <h4>Content Quality</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="content-score">0</span><span class="criterion-max">/20</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="content-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Evaluation of slide content, organization, and relevance to the topic. Includes assessment of information accuracy, depth, and appropriateness for the audience.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Information Accuracy:</span> <span class="metric-value" id="content-accuracy">Excellent</span></li>
+                                        <li><span class="metric-name">Organization:</span> <span class="metric-value" id="content-organization">Very Good</span></li>
+                                        <li><span class="metric-name">Audience Relevance:</span> <span class="metric-value" id="content-relevance">Excellent</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Formatting Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-palette"></i>
+                                        <h4>Formatting</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="formatting-score">0</span><span class="criterion-max">/15</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="formatting-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Assessment of slide design, color scheme, typography, and overall aesthetic appeal. Includes evaluation of consistency and professional appearance.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Design Consistency:</span> <span class="metric-value" id="format-consistency">Excellent</span></li>
+                                        <li><span class="metric-name">Color Harmony:</span> <span class="metric-value" id="format-color">Good</span></li>
+                                        <li><span class="metric-name">Typography:</span> <span class="metric-value" id="format-typography">Very Good</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Smart Control Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-hand-pointer"></i>
+                                        <h4>Smart Control</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="control-score">0</span><span class="criterion-max">/15</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="control-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Evaluation of gesture and voice command usage effectiveness. Measures how well you leveraged AI-powered controls during the presentation.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Gesture Recognition Rate:</span> <span class="metric-value" id="control-gesture">Very Good</span></li>
+                                        <li><span class="metric-name">Voice Command Success:</span> <span class="metric-value" id="control-voice">Excellent</span></li>
+                                        <li><span class="metric-name">Control Fluidity:</span> <span class="metric-value" id="control-fluidity">Good</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Visual Clarity Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-eye"></i>
+                                        <h4>Visual Clarity</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="visual-score">0</span><span class="criterion-max">/15</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="visual-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Assessment of visual elements, including clarity of images, diagrams, and text readability. Evaluates the effectiveness of visual aids in communicating concepts.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Image Quality:</span> <span class="metric-value" id="visual-image">Excellent</span></li>
+                                        <li><span class="metric-name">Text Readability:</span> <span class="metric-value" id="visual-text">Very Good</span></li>
+                                        <li><span class="metric-name">Visual Information Density:</span> <span class="metric-value" id="visual-density">Good</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Slide Navigation Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <h4>Slide Navigation</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="navigation-score">0</span><span class="criterion-max">/15</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="navigation-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Evaluation of flow between slides, transitions, and logical progression of information. Assesses timing and pacing throughout the presentation.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Logical Flow:</span> <span class="metric-value" id="nav-flow">Very Good</span></li>
+                                        <li><span class="metric-name">Transition Quality:</span> <span class="metric-value" id="nav-transition">Good</span></li>
+                                        <li><span class="metric-name">Timing & Pacing:</span> <span class="metric-value" id="nav-timing">Excellent</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Language Usage Criterion -->
+                            <div class="criterion-card">
+                                <div class="criterion-header">
+                                    <div class="criterion-title">
+                                        <i class="fas fa-comment-alt"></i>
+                                        <h4>Language Usage</h4>
+                                    </div>
+                                    <div class="criterion-score">
+                                        <span id="language-score">0</span><span class="criterion-max">/20</span>
+                                    </div>
+                                </div>
+                                <div class="criterion-meter">
+                                    <div class="criterion-bar">
+                                        <div class="criterion-progress" id="language-progress"></div>
+                                    </div>
+                                </div>
+                                <div class="criterion-details">
+                                    <p>Assessment of clarity, conciseness, and appropriateness of language throughout the presentation. Evaluates grammar, terminology, and communication effectiveness.</p>
+                                    <ul class="criterion-metrics">
+                                        <li><span class="metric-name">Clarity & Conciseness:</span> <span class="metric-value" id="lang-clarity">Very Good</span></li>
+                                        <li><span class="metric-name">Grammar & Terminology:</span> <span class="metric-value" id="lang-grammar">Excellent</span></li>
+                                        <li><span class="metric-name">Communication Effectiveness:</span> <span class="metric-value" id="lang-communication">Very Good</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="evaluation-summary-box">
+                            <h3>Evaluation Summary</h3>
+                            <p id="evaluation-summary-text">Your presentation demonstrates excellent content organization and smart control usage. Visual elements are well-designed, though some improvements in slide density could enhance clarity. Your language usage and slide navigation show a high level of professionalism. Continue refining your formatting choices for even better results in future presentations.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gesture Analysis Tab -->
+                    <div class="tab-panel" id="gesture-analysis">
+                        <h3>Gesture Recognition Analysis</h3>
+                        <p class="tab-description">This analysis shows how effectively you used hand gestures and body language during your presentation. The AI system tracked and evaluated your movements to provide insights on your non-verbal communication.</p>
+                        <div class="analysis-grid">
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Gesture Usage</h4>
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="gestureChart"></canvas>
+                                </div>
+                                <div class="card-footer">
+                                    <p>Most used gesture: <strong>Swipe Left</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Gesture Accuracy</h4>
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <div class="accuracy-stats">
+                                    <div class="accuracy-item">
+                                        <div class="accuracy-label">Swipe Left</div>
+                                        <div class="accuracy-bar">
+                                            <div class="accuracy-fill" style="width: 92%"></div>
+                                        </div>
+                                        <div class="accuracy-value">92%</div>
+                                    </div>
+                                    <div class="accuracy-item">
+                                        <div class="accuracy-label">Swipe Right</div>
+                                        <div class="accuracy-bar">
+                                            <div class="accuracy-fill" style="width: 88%"></div>
+                                        </div>
+                                        <div class="accuracy-value">88%</div>
+                                    </div>
+                                    <div class="accuracy-item">
+                                        <div class="accuracy-label">Pinch</div>
+                                        <div class="accuracy-bar">
+                                            <div class="accuracy-fill" style="width: 65%"></div>
+                                        </div>
+                                        <div class="accuracy-value">65%</div>
+                                    </div>
+                                    <div class="accuracy-item">
+                                        <div class="accuracy-label">Point</div>
+                                        <div class="accuracy-bar">
+                                            <div class="accuracy-fill" style="width: 82%"></div>
+                                        </div>
+                                        <div class="accuracy-value">82%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Analysis Tab -->
+                    <div class="tab-panel" id="voice-analysis">
+                        <h3>Voice Recognition Analysis</h3>
+                        <p class="tab-description">This analysis evaluates how you used your voice during the presentation, including your tone, pace, clarity, and command usage. Effective vocal delivery is crucial for engaging your audience and conveying your message clearly.</p>
+                        <div class="analysis-grid">
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Voice Command Usage</h4>
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="voiceChart"></canvas>
+                                </div>
+                                <div class="card-footer">
+                                    <p>Most used command: <strong>Next Slide</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Voice Metrics</h4>
+                                    <i class="fas fa-volume-up"></i>
+                                </div>
+                                <div class="voice-metrics">
+                                    <div class="metric-item">
+                                        <div class="metric-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                        <div class="metric-data">
+                                            <span class="metric-value">120</span>
+                                            <span class="metric-label">Words Per Minute</span>
+                                        </div>
+                                        <div class="metric-indicator good">Good</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-icon"><i class="fas fa-volume-down"></i></div>
+                                        <div class="metric-data">
+                                            <span class="metric-value">65 dB</span>
+                                            <span class="metric-label">Average Volume</span>
+                                        </div>
+                                        <div class="metric-indicator good">Good</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-icon"><i class="fas fa-pause"></i></div>
+                                        <div class="metric-data">
+                                            <span class="metric-value">1.2s</span>
+                                            <span class="metric-label">Average Pause</span>
+                                        </div>
+                                        <div class="metric-indicator warning">Too Short</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-icon"><i class="fas fa-percent"></i></div>
+                                        <div class="metric-data">
+                                            <span class="metric-value">94%</span>
+                                            <span class="metric-label">Recognition Rate</span>
+                                        </div>
+                                        <div class="metric-indicator excellent">Excellent</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Engagement Analysis Tab -->
+                    <div class="tab-panel" id="engagement-analysis">
+                        <h3>Audience Engagement Analysis</h3>
+                        <p class="tab-description">This analysis shows how your audience responded throughout your presentation, highlighting moments of peak engagement and opportunities for improvement. Maintaining high audience engagement is key to a successful presentation.</p>
+                        <div class="analysis-grid">
+                            <div class="analysis-card full-width">
+                                <div class="card-header">
+                                    <h4>Engagement Over Time</h4>
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="chart-container large">
+                                    <canvas id="engagementChart"></canvas>
+                                </div>
+                                <div class="card-footer">
+                                    <p>Peak engagement at slide: <strong>12</strong> (Q&A Section)</p>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Engagement Breakdown</h4>
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="engagement-breakdown">
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">Highly Engaged</div>
+                                        <div class="breakdown-value">65%</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">Moderately Engaged</div>
+                                        <div class="breakdown-value">25%</div>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">Low Engagement</div>
+                                        <div class="breakdown-value">10%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <h4>Key Moments</h4>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="key-moments">
+                                    <div class="moment-item">
+                                        <div class="moment-time">05:22</div>
+                                        <div class="moment-description">Peak engagement during case study presentation</div>
+                                    </div>
+                                    <div class="moment-item">
+                                        <div class="moment-time">08:45</div>
+                                        <div class="moment-description">Significant audience reaction to demonstration</div>
+                                    </div>
+                                    <div class="moment-item">
+                                        <div class="moment-time">12:30</div>
+                                        <div class="moment-description">Engagement spike during interactive segment</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Improvement Suggestions Tab -->
+                    <div class="tab-panel" id="improvement-suggestions">
+                        <h3>Improvement Tips</h3>
+                        <p class="tab-description">Based on our AI analysis, here are personalized suggestions to help you improve your future presentations.</p>
+                        
+                        <div class="suggestions-container">
+                            <div class="suggestion-card">
+                                <div class="suggestion-icon">
+                                    <i class="fas fa-hand-point-up"></i>
+                                </div>
+                                <div class="suggestion-content">
+                                    <h4>Practice Pinch Gestures</h4>
+                                    <p>Your pinch gesture recognition rate was only 65%. We recommend practicing this gesture for more reliable zoom control during your presentations.</p>
+                                    <a href="#" class="suggestion-link">View Tutorial <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-card">
+                                <div class="suggestion-icon">
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <div class="suggestion-content">
+                                    <h4>Increase Pause Duration</h4>
+                                    <p>Your average pause duration was 1.2 seconds, which may be too short for audience comprehension. Try extending pauses to 2-3 seconds after key points.</p>
+                                    <a href="#" class="suggestion-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="suggestion-card">
+                                <div class="suggestion-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="suggestion-content">
+                                    <h4>Enhance Middle Section Engagement</h4>
+                                    <p>Engagement dropped between slides 15-18. Consider adding more interactive elements or questions to boost audience participation in this section.</p>
+                                    <a href="#" class="suggestion-link">Engagement Tips <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feedback-collection">
+            <div class="container">
+                <h2>Collect Audience Feedback</h2>
+                <p>Share the following link with your audience to collect their feedback:</p>
+                <div class="feedback-link">
+                    <input type="text" value="https://smart-education.com/feedback/p78k9d2" readonly>
+                    <button class="copy-link"><i class="fas fa-copy"></i></button>
+                </div>
+                <div class="qr-code-container">
+                    <div class="qr-code">
+                        <img src="https://via.placeholder.com/150?text=QR+Code" alt="Feedback QR Code">
+                    </div>
+                    <div class="qr-info">
+                        <p>Scan with a QR code reader to access the feedback form</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="action-buttons">
+            <div class="container">
+                <a href="index.html" class="btn secondary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <a href="#" class="btn primary" id="download-report"><i class="fas fa-download"></i> Download Full Report</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Slide AI</h3>
+                    <p>AI-powered presentation platform for smarter presentations and real-time feedback.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="presentations.html">Presentations</a></li>
+                        <li><a href="ai-evaluation-results.html">Evaluation Results</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@slideai.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Innovation St, Tech City</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Slide AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
