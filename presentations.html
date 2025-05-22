@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide AI - Interactive Presentation Platform</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/presentation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="JS/script.js" defer></script>
+    <script src="JS/presentation.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><i class="fas fa-file-powerpoint"></i> Slide AI</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="presentations.html" class="active">Presentations</a></li>
+                <li><a href="ai-evaluation-results.html">Evaluation Results</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="login.html" class="login-link"><i class="fas fa-user"></i> Login</a></li>
+                <li><a href="register.html" class="register-link"><i class="fas fa-user-plus"></i> Register</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="presentation-hero" class="presentation-hero-section">
+            <div class="presentation-hero-content">
+                <h1 data-aos="fade-up">Slide AI</h1>
+                <p data-aos="fade-up" data-aos-delay="200">Upload, deliver, and evaluate presentations with AI-powered gesture control and speech recognition.</p>
+                <div class="presentation-cta" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#upload-section" class="btn primary"><i class="fas fa-upload"></i> Upload Presentation</a>
+                    <a href="#my-presentations" class="btn secondary"><i class="fas fa-folder-open"></i> My Presentations</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="upload-section" class="upload-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">Upload Presentation</h2>
+                    <p class="section-subtitle">Upload your PowerPoint presentations to start using our interactive platform</p>
+                </div>
+
+                <div class="upload-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="upload-box">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop Files Here</h3>
+                        <p>or</p>
+                        <label for="file-upload" class="file-upload-btn">Browse Files</label>
+                        <input type="file" id="file-upload" accept=".ppt, .pptx" hidden>
+                        <p class="file-types">Supported file types: .ppt, .pptx</p>
+                    </div>
+                    <div class="upload-progress hidden">
+                        <div class="progress-info">
+                            <span class="file-name">presentation.pptx</span>
+                            <span class="file-size">2.5 MB / 5 MB</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 50%"></div>
+                        </div>
+                        <button class="cancel-upload"><i class="fas fa-times"></i> Cancel</button>
+                    </div>
+                    <div class="upload-success hidden">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Upload Complete!</h3>
+                        <p>Your presentation has been uploaded successfully.</p>
+                        <div class="success-actions">
+                            <a href="#my-presentations" class="btn secondary">View All Presentations</a>
+                            <a href="#" class="btn primary present-now">Present Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="my-presentations" class="my-presentations-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">My Presentations</h2>
+                    <p class="section-subtitle">Manage and present your uploaded content</p>
+                </div>
+
+                <div class="presentations-filters" data-aos="fade-up" data-aos-delay="100">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search presentations...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option value="all">All Categories</option>
+                            <option value="recent">Recently Added</option>
+                            <option value="presented">Previously Presented</option>
+                            <option value="pending">Pending Evaluation</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="toggle-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                            <button class="toggle-btn" data-view="list"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="presentations-grid" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Presentation Item 1 -->
+                    <div class="presentation-item">
+                        <div class="presentation-thumbnail">
+                            <img src="https://via.placeholder.com/300x200?text=Presentation+1" alt="Presentation 1">
+                            <div class="presentation-actions">
+                                <button class="action-btn present-btn"><i class="fas fa-play"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="presentation-info">
+                            <h3 class="presentation-title">AI in Education</h3>
+                            <div class="presentation-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Apr 15, 2025</span>
+                                <span><i class="fas fa-clock"></i> 25 slides</span>
+                            </div>
+                            <div class="presentation-stats">
+                                <span class="stat"><i class="fas fa-eye"></i> 24 views</span>
+                                <span class="stat"><i class="fas fa-star"></i> 4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Presentation Item 2 -->
+                    <div class="presentation-item">
+                        <div class="presentation-thumbnail">
+                            <img src="https://via.placeholder.com/300x200?text=Presentation+2" alt="Presentation 2">
+                            <div class="presentation-actions">
+                                <button class="action-btn present-btn"><i class="fas fa-play"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="presentation-info">
+                            <h3 class="presentation-title">Modern Teaching Methods</h3>
+                            <div class="presentation-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Apr 10, 2025</span>
+                                <span><i class="fas fa-clock"></i> 18 slides</span>
+                            </div>
+                            <div class="presentation-stats">
+                                <span class="stat"><i class="fas fa-eye"></i> 31 views</span>
+                                <span class="stat"><i class="fas fa-star"></i> 4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Presentation Item 3 -->
+                    <div class="presentation-item">
+                        <div class="presentation-thumbnail">
+                            <img src="https://via.placeholder.com/300x200?text=Presentation+3" alt="Presentation 3">
+                            <div class="presentation-actions">
+                                <button class="action-btn present-btn"><i class="fas fa-play"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="presentation-info">
+                            <h3 class="presentation-title">Student Engagement Strategies</h3>
+                            <div class="presentation-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Apr 5, 2025</span>
+                                <span><i class="fas fa-clock"></i> 22 slides</span>
+                            </div>
+                            <div class="presentation-stats">
+                                <span class="stat"><i class="fas fa-eye"></i> 19 views</span>
+                                <span class="stat"><i class="fas fa-star"></i> 4.2/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Presentation Item 4 -->
+                    <div class="presentation-item">
+                        <div class="presentation-thumbnail">
+                            <img src="https://via.placeholder.com/300x200?text=Presentation+4" alt="Presentation 4">
+                            <div class="presentation-actions">
+                                <button class="action-btn present-btn"><i class="fas fa-play"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="presentation-info">
+                            <h3 class="presentation-title">Digital Learning Tools</h3>
+                            <div class="presentation-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Mar 28, 2025</span>
+                                <span><i class="fas fa-clock"></i> 15 slides</span>
+                            </div>
+                            <div class="presentation-stats">
+                                <span class="stat"><i class="fas fa-eye"></i> 27 views</span>
+                                <span class="stat"><i class="fas fa-star"></i> 4.6/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load-more" data-aos="fade-up" data-aos-delay="300">
+                    <button class="btn secondary">Load More <i class="fas fa-arrow-down"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="presentation-features-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">Platform Features</h2>
+                    <p class="section-subtitle">Discover what makes our presentation platform unique</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Gesture Control</h3>
+                            <p>Navigate presentations with natural hand gestures like swiping, pinching, and pointing</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Voice Commands</h3>
+                            <p>Control your presentation with simple voice commands like "next slide" or "zoom in"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>AI Analysis</h3>
+                            <p>Get detailed insights on your presentation quality, including confidence and engagement metrics</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Feedback System</h3>
+                            <p>Collect structured feedback from your audience on presentation clarity and effectiveness</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3>Slide AI</h3>
+                    <p>Revolutionizing presentations with AI-powered tools and platforms.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="presentations.html">Presentations</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="ai-evaluation-results.html">Evaluation Results</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@smarteducation.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Slide AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
