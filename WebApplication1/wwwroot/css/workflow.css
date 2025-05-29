@@ -1,0 +1,119 @@
+/* Workflow Styles - How Slide AI Works Section */
+.workflow-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 20px;
+    flex-wrap: nowrap;
+}
+
+.workflow-step {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 2.5rem 2rem;
+    margin: 0 0.5rem;
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.workflow-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    border-color: rgba(59, 130, 246, 0.1);
+}
+
+.workflow-number {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.workflow-step:hover .workflow-number {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+}
+
+.workflow-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workflow-step:hover .workflow-icon {
+    transform: scale(1.1);
+    color: var(--primary-dark);
+}
+
+.workflow-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--neutral-800);
+    font-weight: 600;
+}
+
+.workflow-desc {
+    color: var(--neutral-600);
+    margin-bottom: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.workflow-arrow {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.workflow-container:hover .workflow-arrow {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 991px) {
+    .workflow-container {
+        flex-direction: column;
+        padding: 0 10px;
+    }
+    
+    .workflow-step {
+        margin: 1rem 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .workflow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+    
+    .workflow-container:hover .workflow-arrow {
+        transform: rotate(90deg) scale(1.2);
+    }
+}

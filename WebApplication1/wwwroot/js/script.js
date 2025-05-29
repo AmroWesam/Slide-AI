@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
         offset: 100,
         once: true
     });
+    
+    // Initialize steps animation in How It Works section
+    initHowItWorksAnimation();
+    
+    // Initialize sample cards interaction
+    initSampleCards();
 });
 
 // Mobile menu toggle
@@ -68,28 +74,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Registration page specific code
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle between student and teacher registration
-    const roleOptions = document.querySelectorAll('.role-option');
-    const studentFields = document.querySelector('.student-fields');
-    const teacherFields = document.querySelector('.teacher-fields');
-
-    if (roleOptions.length > 0) {
-        roleOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                // Remove active class from all options
-                roleOptions.forEach(opt => opt.classList.remove('active'));
-                // Add active class to clicked option
-                option.classList.add('active');
-
-                // Show/hide relevant fields
-                if (option.dataset.role === 'student') {
-                    studentFields.classList.remove('hidden');
-                    teacherFields.classList.add('hidden');
-                } else {
-                    studentFields.classList.add('hidden');
-                    teacherFields.classList.remove('hidden');
-                }
-            });
+    // User profile initialization
+    const profileFields = document.querySelector('.user-profile-fields');
+    const presentationGoals = document.getElementById('presentationGoals');
+    
+    if (presentationGoals) {
+        // Update field visibility based on selected goals if needed
+        presentationGoals.addEventListener('change', () => {
+            // Additional customization logic can be added here
+            // For example, showing different tips based on presentation goals
+            console.log('Selected goal:', presentationGoals.value);
         });
     }
 
@@ -218,7 +212,188 @@ document.addEventListener('DOMContentLoaded', () => {
         errorElement.textContent = '';
     }
 
-    // Form submission
+    // How It Works Animation Function
+function initHowItWorksAnimation() {
+    const stepCards = document.querySelectorAll('.step-card');
+    const stepConnectors = document.querySelectorAll('.step-connector');
+    const stepsContainer = document.querySelector('.steps-container');
+    
+    if (stepCards.length === 0) return;
+    
+    // Add AOS animation to steps container
+    if (stepsContainer) {
+        stepsContainer.setAttribute('data-aos', 'fade-up');
+        stepsContainer.setAttribute('data-aos-duration', '800');
+    }
+    
+    // Add staggered animation delay to step cards
+    stepCards.forEach((card, index) => {
+        // Set AOS attributes
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', (index * 150).toString());
+        card.setAttribute('data-aos-duration', '800');
+        
+        // Add hover interaction
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
+            
+            // Animate the step number
+            const stepNumber = this.querySelector('.step-number');
+            if (stepNumber) {
+                stepNumber.style.transform = 'scale(1.1)';
+                stepNumber.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.4)';
+            }
+            
+            // Animate the step icon
+            const stepIcon = this.querySelector('.step-icon');
+            if (stepIcon) {
+                stepIcon.style.transform = 'scale(1.1)';
+                stepIcon.style.backgroundColor = 'rgba(59, 130, 246, 0.15)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+            
+            // Reset animations
+            const stepNumber = this.querySelector('.step-number');
+            if (stepNumber) {
+                stepNumber.style.transform = '';
+                stepNumber.style.boxShadow = '';
+            }
+            
+            const stepIcon = this.querySelector('.step-icon');
+            if (stepIcon) {
+                stepIcon.style.transform = '';
+                stepIcon.style.backgroundColor = '';
+            }
+        });
+    });
+    
+    // Add animation to connectors
+    stepConnectors.forEach((connector, index) => {
+        connector.setAttribute('data-aos', 'fade-up');
+        connector.setAttribute('data-aos-delay', ((index + 1) * 150).toString());
+        connector.setAttribute('data-aos-duration', '600');
+    });
+}
+
+// Sample Cards Interaction
+function initSampleCards() {
+    const sampleCards = document.querySelectorAll('.sample-card');
+    const samplesSection = document.querySelector('.samples-section');
+    
+    if (sampleCards.length === 0) return;
+    
+    // Add AOS to section header
+    if (samplesSection) {
+        const sectionHeader = samplesSection.querySelector('.section-header');
+        if (sectionHeader) {
+            sectionHeader.setAttribute('data-aos', 'fade-up');
+            sectionHeader.setAttribute('data-aos-duration', '800');
+        }
+    }
+    
+    // Initialize counter for staggered animations
+    let delayCounter = 0;
+    
+    sampleCards.forEach((card, index) => {
+        // Set AOS attributes with staggered delay
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', (index * 150).toString());
+        card.setAttribute('data-aos-duration', '800');
+        
+        // Get sample preview image and overlay
+        const preview = card.querySelector('.sample-preview');
+        const overlay = card.querySelector('.sample-overlay');
+        const sampleInfo = card.querySelector('.sample-info');
+        
+        if (!preview || !overlay) return;
+        
+        // Add hover interactions for smooth animations
+        card.addEventListener('mouseenter', function() {
+            // Animate overlay
+            if (overlay) {
+                overlay.style.opacity = '1';
+                overlay.style.transform = 'translateY(0)';
+            }
+            
+            // Animate image
+            const img = preview.querySelector('img');
+            if (img) {
+                img.style.transform = 'scale(1.1) rotate(2deg)';
+                img.style.filter = 'drop-shadow(0 15px 20px rgba(0, 0, 0, 0.15))';
+            }
+            
+            // Animate card
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
+            
+            // Animate sample info
+            if (sampleInfo) {
+                const title = sampleInfo.querySelector('h3');
+                if (title) {
+                    title.style.color = 'var(--primary-color)';
+                }
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            // Reset overlay
+            if (overlay) {
+                overlay.style.opacity = '';
+                overlay.style.transform = '';
+            }
+            
+            // Reset image
+            const img = preview.querySelector('img');
+            if (img) {
+                img.style.transform = '';
+                img.style.filter = '';
+            }
+            
+            // Reset card
+            this.style.transform = '';
+            this.style.boxShadow = '';
+            
+            // Reset sample info
+            if (sampleInfo) {
+                const title = sampleInfo.querySelector('h3');
+                if (title) {
+                    title.style.color = '';
+                }
+            }
+        });
+        
+        // Add a slight animation to rating stars
+        const ratingStars = card.querySelector('.rating-stars');
+        if (ratingStars) {
+            ratingStars.style.transition = 'all 0.3s ease';
+            
+            card.addEventListener('mouseenter', function() {
+                ratingStars.style.transform = 'scale(1.1)';
+                ratingStars.style.textShadow = '0 4px 8px rgba(245, 158, 11, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                ratingStars.style.transform = '';
+                ratingStars.style.textShadow = '';
+            });
+        }
+    });
+    
+    // Add a scroll animation to CTA container
+    const ctaContainer = samplesSection ? samplesSection.querySelector('.cta-container') : null;
+    if (ctaContainer) {
+        ctaContainer.setAttribute('data-aos', 'zoom-in');
+        ctaContainer.setAttribute('data-aos-delay', '300');
+        ctaContainer.setAttribute('data-aos-duration', '800');
+    }
+}
+
+// Form submission
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         let isValid = true;

@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult PresentationViewer()
+        public IActionResult AIEvaluationResults()
         {
             return View();
         }

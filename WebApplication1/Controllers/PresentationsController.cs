@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using WebApplication1.Services;
-using System.Diagnostics; // لاستخدام Process و ProcessStartInfo
+using System.Diagnostics; // For using Process and ProcessStartInfo
 
 namespace WebApplication1.Controllers
 {
@@ -24,24 +24,24 @@ namespace WebApplication1.Controllers
         {
             if (file == null || file.Length == 0)
             {
-                TempData["ErrorMessage"] = "لم يتم اختيار ملف";
+                TempData["ErrorMessage"] = "No file selected";
                 return RedirectToAction("Presentations", "Home");
             }
 
             try
             {
-                // التأكد من وجود المجلد
+                // Ensure directory exists
                 string pythonPresentationFolder = @"C:\Smart Control Techniques\Presentation";
                 if (!Directory.Exists(pythonPresentationFolder))
                 {
                     Directory.CreateDirectory(pythonPresentationFolder);
                 }
 
-                // نهج جذري: حذف وإعادة إنشاء مجلد العرض بالكامل
+                // Radical approach: delete and recreate the presentation folder completely
                 TempData["ScriptOutput"] += "\nCompletely recreating the presentation directory...";
                 try
                 {
-                    // حفظ قائمة بجميع ملفات PowerPoint (غير الصور)
+                    // Save a list of all PowerPoint files (not images)
                     List<string> pptxFiles = new List<string>();
                     if (Directory.Exists(pythonPresentationFolder))
                     {
@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
                             string[] files = Directory.GetFiles(pythonPresentationFolder, ext);
                             foreach (string pptFile in files)
                             {
-                                // حفظ بيانات الملف للاستعادة لاحقًا
+                                // Save file data for later restoration
                                 string fileName = Path.GetFileName(pptFile);
                                 byte[] fileData = System.IO.File.ReadAllBytes(pptFile);
                                 pptxFiles.Add(fileName);
@@ -60,19 +60,19 @@ namespace WebApplication1.Controllers
                         }
                     }
 
-                    // حذف المجلد بالكامل إذا كان موجودًا
+                    // Delete the entire folder if it exists
                     if (Directory.Exists(pythonPresentationFolder))
                     {
                         Directory.Delete(pythonPresentationFolder, true);
                         TempData["ScriptOutput"] += "\nPresentation directory completely removed.";
                     }
 
-                    // إعادة إنشاء المجلد
+                    // Recreate the folder
                     Directory.CreateDirectory(pythonPresentationFolder);
                     TempData["ScriptOutput"] += "\nPresentation directory recreated fresh.";
 
-                    // إعادة ملفات PowerPoint الأصلية (اختياري)
-                    // قمنا بإلغاء تفعيل هذا حتى نزيل كل شيء وتبدأ من الصفر
+                    // Restore original PowerPoint files (optional)
+                    // We disabled this to remove everything and start from scratch
                     /*
                     foreach (string pptxFile in pptxFiles)
                     {
@@ -86,30 +86,30 @@ namespace WebApplication1.Controllers
                 {
                     TempData["ErrorMessage"] += $"\nError recreating presentation directory: {ex.Message}";
                     
-                    // ضمان وجود المجلد على أي حال
+                    // Ensure the folder exists in any case
                     if (!Directory.Exists(pythonPresentationFolder))
                     {
                         Directory.CreateDirectory(pythonPresentationFolder);
                     }
                 }
                 
-                // نسخ ملف PowerPoint إلى مجلد Python
+                // Copy PowerPoint file to Python folder
                 string powerPointFilePath = Path.Combine(pythonPresentationFolder, file.FileName);
                 using (var stream = new FileStream(powerPointFilePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                // تشغيل سكربت تحويل البوربوينت إلى صور
+                // Run script to convert PowerPoint to images
                 string pythonScriptPath = @"C:\Smart Control Techniques\convert.py";
                 
-                // التحقق من وجود السكربت وإنشائه إذا لم يكن موجودًا
+                // Check if the script exists and create it if not
                 if (!System.IO.File.Exists(pythonScriptPath))
                 {
                     CreatePythonConversionScript(pythonScriptPath);
                 }
                 
-                // تشغيل سكربت التحويل convert.py مباشرة
+                // Run the conversion script convert.py directly
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "python",
@@ -127,13 +127,13 @@ namespace WebApplication1.Controllers
                 string error = await process.StandardError.ReadToEndAsync();
                 process.WaitForExit();
 
-                // تشغيل main.py تلقائياً إذا نجح تحويل ملف PowerPoint
+                // Run main.py automatically if PowerPoint file conversion was successful
                 if (process.ExitCode == 0 && !string.IsNullOrEmpty(output) && output.Contains("Conversion complete"))
                 {
                     string mainPyPath = Path.Combine(@"C:\Smart Control Techniques", "main.py");
                     if (System.IO.File.Exists(mainPyPath))
                     {
-                        // سجل أنه سيتم تشغيل main.py
+                        // Log that main.py will be run
                         TempData["ScriptOutput"] += "\nStarting main.py presentation viewer...";
                         
                         ProcessStartInfo mainPsi = new ProcessStartInfo
@@ -148,7 +148,7 @@ namespace WebApplication1.Controllers
                         Process mainProcess = new Process { StartInfo = mainPsi };
                         mainProcess.Start();
                         
-                        // لا ننتظر انتهاء العملية لأن main.py سيفتح نافذة رسومية
+                        // We don't wait for the process to complete because main.py will open a graphical window
                         TempData["SuccessMessage"] += "\nPresentation viewer started successfully.";
                     }
                     else
@@ -157,12 +157,12 @@ namespace WebApplication1.Controllers
                     }
                 }
 
-                TempData["SuccessMessage"] = "تم رفع ملف العرض التقديمي وتحويله إلى صور بنجاح";
-                return RedirectToAction("Presentations", "Home");
+                TempData["SuccessMessage"] = "Presentation file uploaded and successfully converted to images";
+                return RedirectToAction("AIEvaluationResults", "Home");
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = $"حدث خطأ: {ex.Message}";
+                TempData["ErrorMessage"] = $"An error occurred: {ex.Message}";
                 return RedirectToAction("Presentations", "Home");
             }
         }
@@ -176,7 +176,7 @@ from comtypes import client
 import time
 
 def convert_pptx_to_images():
-    # العثور على أول ملف PowerPoint في المجلد
+    # Find the first PowerPoint file in the folder
     presentation_dir = os.path.join(os.path.dirname(__file__), ""Presentation"")
     if not os.path.exists(presentation_dir):
         print(""Error: Presentation directory does not exist!"")
@@ -192,14 +192,14 @@ def convert_pptx_to_images():
     pptx_file = pptx_files[0]
     print(f""Converting: {pptx_file}"")
     
-    # تحويل العرض التقديمي إلى صور باستخدام PowerPoint COM
+    # Convert presentation to images using PowerPoint COM
     try:
         powerpoint = client.CreateObject(""PowerPoint.Application"")
         powerpoint.Visible = True
         
         presentation = powerpoint.Presentations.Open(pptx_file)
         
-        # حفظ كل شريحة كصورة
+        # Save each slide as an image
         for i in range(1, presentation.Slides.Count + 1):
             image_path = os.path.join(presentation_dir, f""slide_{i:03d}.jpg"")
             presentation.Slides(i).Export(image_path, ""JPG"")

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlideCraft Pro - Interactive Presentation Platform</title>
+    <title>Slide AI - PowerPoint Analysis Tool</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/presentation.css">
 
@@ -24,23 +24,23 @@
                     document.getElementById('presentation-form').submit();
                 }
             });
-            
+
             // Drag and drop support
             const uploadBox = document.querySelector('.upload-box');
-            
+
             uploadBox.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 uploadBox.classList.add('drag-over');
             });
-            
+
             uploadBox.addEventListener('dragleave', () => {
                 uploadBox.classList.remove('drag-over');
             });
-            
+
             uploadBox.addEventListener('drop', (e) => {
                 e.preventDefault();
                 uploadBox.classList.remove('drag-over');
-                
+
                 if (e.dataTransfer.files.length > 0) {
                     document.getElementById('file-upload').files = e.dataTransfer.files;
                     document.getElementById('presentation-form').submit();
@@ -53,12 +53,13 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <h1><i class="fas fa-file-powerpoint"></i> SlideCraft Pro</h1>
+                <h1><i class="fas fa-file-powerpoint"></i> Slide AI</h1>
             </div>
             <ul class="nav-links">
                 <li><a href="/Home/Index">Home</a></li>
-                <li><a href="/Home/Presentations" class="active">Presentations</a></li>
-                <li><a href="/Home/Dashboard">Dashboard</a></li>
+                <li><a href="/Home/Presentations" class="active">Upload Presentation</a></li>
+                <li><a href="/Home/Feedback">Evaluation Results</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="/Home/Login" class="login-link"><i class="fas fa-user"></i> Login</a></li>
@@ -73,11 +74,11 @@
     <main>
         <section id="presentation-hero" class="presentation-hero-section">
             <div class="presentation-hero-content">
-                <h1 data-aos="fade-up">SlideCraft Pro</h1>
-                <p data-aos="fade-up" data-aos-delay="200">Upload, deliver, and evaluate presentations with AI-powered gesture control and speech recognition.</p>
+                <h1 data-aos="fade-up">Slide AI</h1>
+                <p data-aos="fade-up" data-aos-delay="200">Upload your PowerPoint presentations for comprehensive AI-powered analysis and evaluation.</p>
                 <div class="presentation-cta" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#upload-section" class="btn primary"><i class="fas fa-upload"></i> Upload Presentation</a>
-                    <a href="#my-presentations" class="btn secondary"><i class="fas fa-folder-open"></i> My Presentations</a>
+                    <a href="#upload-section" class="btn primary"><i class="fas fa-upload"></i> Upload for Analysis</a>
+                    <a href="#my-presentations" class="btn secondary"><i class="fas fa-folder-open"></i> My Evaluations</a>
                 </div>
             </div>
         </section>
@@ -85,25 +86,25 @@
         <section id="upload-section" class="upload-section">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
-                    <h2 class="section-title">Upload Presentation</h2>
-                    <p class="section-subtitle">Upload your PowerPoint presentations to start using our interactive platform</p>
+                    <h2 class="section-title">Upload for Analysis</h2>
+                    <p class="section-subtitle">Upload your PowerPoint presentations to get comprehensive AI evaluation</p>
                 </div>
-                
+
                 @if (TempData["SuccessMessage"] != null)
                 {
                     <div class="alert alert-success" role="alert" data-aos="fade-up">
                         <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
                     </div>
                 }
-                
+
                 @if (TempData["ErrorMessage"] != null)
                 {
                     <div class="alert alert-danger" role="alert" data-aos="fade-up">
                         <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
                     </div>
                 }
-                
-                <!-- معلومات إضافية -->
+
+                <!-- Additional Information -->
                 @if (TempData["ScriptOutput"] != null)
                 {
                     <div id="script-output" style="display:none;">@TempData["ScriptOutput"]</div>
@@ -113,7 +114,7 @@
                     <div class="upload-box">
                         <form id="presentation-form" action="/Presentations/Upload" method="post" enctype="multipart/form-data">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <h3>Drag & Drop Files Here</h3>
+                            <h3>Drag & Drop Your PowerPoint Here</h3>
                             <p>or</p>
                             <label for="file-upload" class="file-upload-btn">Browse Files</label>
                             <input type="file" name="file" id="file-upload" accept=".ppt, .pptx" hidden>
@@ -137,45 +138,14 @@
                     <div class="upload-success hidden">
                         <i class="fas fa-check-circle"></i>
                         <h3>Upload Complete!</h3>
-                        <p>Your presentation has been uploaded and converted successfully.</p>
+                        <p>Your presentation has been uploaded and is ready for AI analysis.</p>
                         <div class="success-actions">
                             <a href="#my-presentations" class="btn secondary">View All Presentations</a>
-                            <a href="#" class="btn primary present-now">Present Now</a>
+                            <a href="#" class="btn primary present-now">Analyze Now</a>
                         </div>
                     </div>
 
-                    <!-- Simple Conversion Log - Only shown after upload -->
-                    @if (TempData["ScriptOutput"] != null && !string.IsNullOrEmpty(TempData["ScriptOutput"].ToString()))
-                    {
-                        <div class="conversion-log" style="margin-top: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 5px solid #3498db;">
-                            <div class="log-header" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <h4 style="margin: 0;">Conversion Details</h4>
-                                <button onclick="toggleLog()" class="btn-sm" style="background: none; border: none; color: #3498db; cursor: pointer;">Show Details</button>
-                            </div>
-                            <div id="log-content" style="display: none; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px; background-color: #f1f1f1; padding: 10px; border-radius: 3px;">
-                                @foreach (var line in TempData["ScriptOutput"].ToString().Split('\n'))
-                                {
-                                    if (!string.IsNullOrWhiteSpace(line))
-                                    {
-                                        <div style="margin-bottom: 5px;">@line</div>
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <script>
-                            function toggleLog() {
-                                var content = document.getElementById('log-content');
-                                var btn = document.querySelector('.log-header button');
-                                if (content.style.display === 'none') {
-                                    content.style.display = 'block';
-                                    btn.textContent = 'Hide Details';
-                                } else {
-                                    content.style.display = 'none';
-                                    btn.textContent = 'Show Details';
-                                }
-                            }
-                        </script>
-                    }
+            
                 </div>
             </div>
         </section>
@@ -183,8 +153,8 @@
         <section id="my-presentations" class="my-presentations-section">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
-                    <h2 class="section-title">My Presentations</h2>
-                    <p class="section-subtitle">Manage and present your uploaded content</p>
+                    <h2 class="section-title">My Evaluations</h2>
+                    <p class="section-subtitle">View and manage your presentation evaluations</p>
                 </div>
 
                 <div class="presentations-filters" data-aos="fade-up" data-aos-delay="100">
@@ -195,14 +165,26 @@
                     <div class="filter-options">
                         <select class="filter-select">
                             <option value="all">All Categories</option>
-                            <option value="recent">Recently Added</option>
-                            <option value="presented">Previously Presented</option>
-                            <option value="pending">Pending Evaluation</option>
+                            <option value="recent">Recently Analyzed</option>
+                            <option value="high-score">High Scoring</option>
+                            <option value="needs-improvement">Needs Improvement</option>
                         </select>
                         <div class="view-toggle">
                             <button class="toggle-btn active" data-view="grid"><i class="fas fa-th"></i></button>
                             <button class="toggle-btn" data-view="list"><i class="fas fa-list"></i></button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Convert Presentation and Start Button -->
+                <div class="conversion-button-container" style="text-align: center; margin-bottom: 30px;">
+                    <button id="convert-and-present-btn" class="btn primary" style="padding: 15px 30px; font-size: 18px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <i class="fas fa-sync"></i> Convert Presentation and Start
+                    </button>
+                    <p style="margin-top: 10px; color: #666; font-style: italic;">
+                        Click here to convert PowerPoint file to images and start presentation automatically
+                    </p>
+                    <div id="conversion-status" style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none;">
                     </div>
                 </div>
 
@@ -323,7 +305,7 @@
                             <p>Navigate presentations with natural hand gestures like swiping, pinching, and pointing</p>
                         </div>
                     </div>
-                    
+
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon">
                             <i class="fas fa-microphone-alt"></i>
@@ -333,7 +315,7 @@
                             <p>Control your presentation with simple voice commands like "next slide" or "zoom in"</p>
                         </div>
                     </div>
-                    
+
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="feature-icon">
                             <i class="fas fa-chart-line"></i>
@@ -343,7 +325,7 @@
                             <p>Get detailed insights on your presentation quality, including confidence and engagement metrics</p>
                         </div>
                     </div>
-                    
+
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="feature-icon">
                             <i class="fas fa-comments"></i>
@@ -362,7 +344,7 @@
         <div class="footer-content">
             <div class="footer-sections">
                 <div class="footer-section">
-                    <h3>SlideCraft Pro</h3>
+                    <h3>Slide AI</h3>
                     <p>Revolutionizing presentations with AI-powered tools and platforms.</p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -387,18 +369,91 @@
                     <ul class="footer-contact">
                         <li><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</li>
                         <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@smarteducation.com</li>
+                        <li><i class="fas fa-envelope"></i> info@slideai.com</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 SlideCraft Pro. All rights reserved.</p>
+                <p>&copy; 2025 Slide AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
+
     <script>
         AOS.init();
+        
+        // Add click handler for "Present Now" button
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all buttons with 'present-now' or 'present-btn' class
+            const presentButtons = document.querySelectorAll('.present-now, .present-btn');
+            
+            // Add click handler for each button
+            presentButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    // Show loading indicator
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+                    this.disabled = true;
+                    
+                    // Create status message
+                    const statusMessage = document.createElement('div');
+                    statusMessage.className = 'status-message';
+                    statusMessage.style.marginTop = '10px';
+                    statusMessage.style.padding = '8px';
+                    statusMessage.style.backgroundColor = '#f8f9fa';
+                    statusMessage.style.borderRadius = '5px';
+                    statusMessage.style.border = '1px solid #ddd';
+                    statusMessage.innerHTML = '<i class="fas fa-sync fa-spin"></i> Converting PowerPoint file to images...';
+                    
+                    // Add status message after the button
+                    if (this.parentNode) {
+                        this.parentNode.appendChild(statusMessage);
+                    }
+                    
+                    // Call server to run conversion script and display
+                    fetch('/Python/StartPresentation', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            statusMessage.innerHTML = '<i class="fas fa-check-circle" style="color: green;"></i> Conversion successful! Starting presentation...';
+                            
+                            // Redirect to presentation page
+                            setTimeout(() => {
+                                window.location.href = '/Home/AIEvaluationResults';
+                            }, 1500);
+                        } else {
+                            // Conversion failed
+                            statusMessage.innerHTML = '<i class="fas fa-times-circle" style="color: red;"></i> Conversion failed: ' + data.message;
+                            statusMessage.style.backgroundColor = '#fff3f3';
+                            statusMessage.style.color = '#d8000c';
+                            
+                            // Reset button to original state
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                        }
+                    })
+                    .catch(error => {
+                        // Connection error
+                        statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: orange;"></i> Error connecting to server';
+                        statusMessage.style.backgroundColor = '#fff3f3';
+                        statusMessage.style.color = '#d8000c';
+                        
+                        // Reset button to original state
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>

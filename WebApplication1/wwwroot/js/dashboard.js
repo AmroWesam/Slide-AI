@@ -1,5 +1,5 @@
 /**
- * SlideCraft Pro - Dashboard JavaScript
+ * Slide AI - Dashboard JavaScript
  * Adds functionality to the dashboard interface
  */
 

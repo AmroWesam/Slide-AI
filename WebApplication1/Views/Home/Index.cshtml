@@ -7,8 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlideCraft Pro - The Future of Interactive Presentations</title>
+    <title>Slide AI - AI-Powered PowerPoint Analysis Tool</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/workflow.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -18,15 +19,14 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <h1><i class="fas fa-file-powerpoint"></i> SlideCraft Pro</h1>
+                <h1><i class="fas fa-file-powerpoint"></i> Slide AI</h1>
             </div>
             <ul class="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
-                <li><a href="/Home/Presentations">Presentations</a></li>
-                <li><a href="/Home/Dashboard">Dashboard</a></li>
+                <li><a href="/Home/Presentations">Upload Presentation</a></li>
+                <li><a href="/Home/Feedback">Evaluation Results</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#teachers">Teachers</a></li>
-                <li><a href="#students">Students</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="/Home/Login" class="login-link"><i class="fas fa-user"></i> Login</a></li>
                 <li><a href="/Home/Register" class="register-link"><i class="fas fa-user-plus"></i> Register</a></li>
@@ -41,30 +41,30 @@
         <section id="hero" class="hero-section">
             <div class="hero-content">
                 <div class="hero-text" data-aos="fade-up">
-                    <h1>SlideCraft Pro</h1>
-                    <h2>The Future of Interactive Presentations</h2>
-                    <p>Welcome to SlideCraft Pro, where advanced technology meets innovative presentation tools to create unique interactive experiences.</p>
+                    <h1>Slide AI</h1>
+                    <h2>AI-Powered Presentation Analysis</h2>
+                    <p>Upload your PowerPoint presentation to get intelligent evaluation of its content, colors, formatting, and your delivery performance with personalized improvement recommendations.</p>
                 </div>
                 <div class="hero-features" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-box">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Online Learning</h3>
-                        <p>Learn anytime, anywhere</p>
+                        <i class="fas fa-file-powerpoint"></i>
+                        <h3>Content Analysis</h3>
+                        <p>Comprehensive evaluation of presentation content quality and organization</p>
                     </div>
                     <div class="feature-box">
-                        <i class="fas fa-brain"></i>
-                        <h3>AI-Powered</h3>
-                        <p>Personalized learning path</p>
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Design Evaluation</h3>
+                        <p>Advanced analysis of colors, formatting and visual elements</p>
                     </div>
                     <div class="feature-box">
-                        <i class="fas fa-users"></i>
-                        <h3>Community</h3>
-                        <p>Learn together, grow together</p>
+                        <i class="fas fa-microphone-alt"></i>
+                        <h3>Performance Analysis</h3>
+                        <p>Evaluation of presentation style, voice tone, and audience engagement</p>
                     </div>
                 </div>
                 <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#features" class="btn primary">Get Started <i class="fas fa-arrow-right"></i></a>
-                    <a href="#features" class="btn secondary">Learn More <i class="fas fa-info-circle"></i></a>
+                    <a href="/Home/Presentations" class="btn primary">Start Evaluation Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#how-it-works" class="btn secondary">How It Works <i class="fas fa-info-circle"></i></a>
                 </div>
                 <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
                     <div class="chevron"></div>
@@ -79,27 +79,76 @@
             </div>
         </section>
 
+        <section id="how-it-works" class="how-it-works-section">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">How Does Slide AI Work?</h2>
+                <p class="section-subtitle">Three simple steps to get comprehensive intelligent evaluation of your presentation</p>
+            </div>
+            
+            <div class="workflow-container">
+                <!-- Step 1 -->
+                <div class="workflow-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="workflow-number">1</div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3 class="workflow-title">Upload Presentation</h3>
+                    <p class="workflow-desc">Upload your PowerPoint file to our platform</p>
+                </div>
+                
+                <!-- Arrow -->
+                <div class="workflow-arrow" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="workflow-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="workflow-number">2</div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="workflow-title">AI Analysis</h3>
+                    <p class="workflow-desc">Artificial intelligence analyzes content, formatting, and colors</p>
+                </div>
+                
+                <!-- Arrow -->
+                <div class="workflow-arrow" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="workflow-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="workflow-number">3</div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="workflow-title">View Results</h3>
+                    <p class="workflow-desc">Get a comprehensive report with recommendations to improve your presentation</p>
+                </div>
+            </div>
+        </section>
+        
         <section id="features" class="features-section">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Our Features</h2>
-                <p class="section-subtitle">Discover what makes SlideCraft Pro special</p>
+                <h2 class="section-title">Slide AI Features</h2>
+                <p class="section-subtitle">Advanced AI technologies to analyze and improve your presentations</p>
             </div>
 
             <div class="features-container">
                 <div class="features-grid">
                     <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
                         <div class="feature-icon">
-                            <i class="fas fa-laptop-code"></i>
+                            <i class="fas fa-search"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Smart Learning</h3>
-                            <p>Personalized learning paths powered by AI technology</p>
+                            <h3>Intelligent Content Analysis</h3>
+                            <p>Comprehensive evaluation of content quality and organization using AI technology</p>
                             <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Adaptive Learning</li>
-                                <li><i class="fas fa-check-circle"></i> Progress Tracking</li>
-                                <li><i class="fas fa-check-circle"></i> Interactive Content</li>
+                                <li><i class="fas fa-check-circle"></i> Analysis of information structure and sequence</li>
+                                <li><i class="fas fa-check-circle"></i> Evaluation of key ideas clarity</li>
+                                <li><i class="fas fa-check-circle"></i> Analysis of text density and appropriate word count</li>
                             </ul>
-                            <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="feature-link">More <i class="fas fa-arrow-right"></i></a>
                         </div>
                         <div class="feature-background">
                             <div class="bg-shape"></div>
@@ -108,17 +157,17 @@
 
                     <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
                         <div class="feature-icon">
-                            <i class="fas fa-mobile-alt"></i>
+                            <i class="fas fa-bolt"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Multi-Platform</h3>
-                            <p>Learn anywhere, anytime on any device</p>
+                            <h3>Presentation Performance Analysis</h3>
+                            <p>Comprehensive evaluation of presentation style and delivery skills</p>
                             <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Mobile Apps</li>
-                                <li><i class="fas fa-check-circle"></i> Offline Access</li>
-                                <li><i class="fas fa-check-circle"></i> Cloud Sync</li>
+                                <li><i class="fas fa-check-circle"></i> Analysis of voice tone and rhythm</li>
+                                <li><i class="fas fa-check-circle"></i> Evaluation of delivery clarity and presentation speed</li>
+                                <li><i class="fas fa-check-circle"></i> Recommendations for performance improvement</li>
                             </ul>
-                            <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="feature-link">More <i class="fas fa-arrow-right"></i></a>
                         </div>
                         <div class="feature-background">
                             <div class="bg-shape"></div>
@@ -127,17 +176,17 @@
 
                     <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
                         <div class="feature-icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-globe"></i>
                         </div>
                         <div class="feature-content">
-                            <h3>Community Learning</h3>
-                            <p>Connect with peers and experts worldwide</p>
+                            <h3>Visual Design Analysis</h3>
+                            <p>Comprehensive evaluation of visual elements and formatting</p>
                             <ul class="feature-list">
-                                <li><i class="fas fa-check-circle"></i> Study Groups</li>
-                                <li><i class="fas fa-check-circle"></i> Expert Support</li>
-                                <li><i class="fas fa-check-circle"></i> Live Sessions</li>
+                                <li><i class="fas fa-check-circle"></i> Analysis of color harmony and impact</li>
+                                <li><i class="fas fa-check-circle"></i> Evaluation of images and graphics usage</li>
+                                <li><i class="fas fa-check-circle"></i> Analysis of text formatting and readability</li>
                             </ul>
-                            <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="feature-link">More <i class="fas fa-arrow-right"></i></a>
                         </div>
                         <div class="feature-background">
                             <div class="bg-shape"></div>
@@ -148,58 +197,87 @@
                 <div class="features-stats" data-aos="fade-up">
                     <div class="stat-item">
                         <div class="stat-number" data-count="1000">0</div>
-                        <div class="stat-label">Active Students</div>
+                        <div class="stat-label">Presentations Analyzed</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-count="100">0</div>
-                        <div class="stat-label">Expert Teachers</div>
+                        <div class="stat-label">Evaluation Criteria</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-count="500">0</div>
-                        <div class="stat-label">Courses</div>
+                        <div class="stat-label">Active Users</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-count="50">0</div>
-                        <div class="stat-label">Countries</div>
+                        <div class="stat-label">Countries Worldwide</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="teachers" class="teachers-section">
-            <h2 class="section-title" data-aos="fade-up">For Teachers</h2>
-            <div class="teachers-grid">
-                <div class="teacher-feature" data-aos="fade-right">
-                    <img src="https://img.icons8.com/color/96/000000/teacher.png" alt="Teaching Tools">
-                    <h3>Teaching Tools</h3>
-                    <p>Comprehensive tools for effective teaching</p>
+        <section id="samples" class="samples-section">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Evaluation Samples</h2>
+                <p class="section-subtitle">Examples of advanced analysis reports from Slide AI</p>
+            </div>
+            
+            <div class="horizontal-samples-container">
+                <div class="sample-card" data-aos="fade-right" data-aos-delay="100">
+                    <div class="sample-preview">
+                        <img src="https://img.icons8.com/color/96/000000/presentation.png" alt="Sample Presentation">
+                        <div class="sample-overlay">
+                            <a href="#" class="btn secondary">View Sample</a>
+                        </div>
+                    </div>
+                    <div class="sample-info">
+                        <h3>Marketing Presentation</h3>
+                        <p>Evaluation of a marketing presentation with notes on color harmony and image impact</p>
+                        <div class="sample-rating">
+                            <span class="rating-label">Overall Rating:</span>
+                            <span class="rating-stars">★★★★☆</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="teacher-feature" data-aos="fade-up">
-                    <img src="https://img.icons8.com/color/96/000000/classroom.png" alt="Class Management">
-                    <h3>Class Management</h3>
-                    <p>Easy-to-use classroom management system</p>
+                
+                <div class="sample-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="sample-preview">
+                        <img src="https://img.icons8.com/color/96/000000/graduation-cap.png" alt="Educational Presentation">
+                        <div class="sample-overlay">
+                            <a href="#" class="btn secondary">View Sample</a>
+                        </div>
+                    </div>
+                    <div class="sample-info">
+                        <h3>Educational Presentation</h3>
+                        <p>Analysis of an educational presentation with recommendations for improving content organization and increasing engagement</p>
+                        <div class="sample-rating">
+                            <span class="rating-label">Overall Rating:</span>
+                            <span class="rating-stars">★★★★★</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="teacher-feature" data-aos="fade-left">
-                    <img src="https://img.icons8.com/color/96/000000/report-card.png" alt="Assessment Tools">
-                    <h3>Assessment Tools</h3>
-                    <p>Advanced assessment and grading tools</p>
+                
+                <div class="sample-card" data-aos="fade-left" data-aos-delay="300">
+                    <div class="sample-preview">
+                        <img src="https://img.icons8.com/color/96/000000/commercial-development-management.png" alt="Sample Presentation">
+                        <div class="sample-overlay">
+                            <a href="#" class="btn secondary">View Sample</a>
+                        </div>
+                    </div>
+                    <div class="sample-info">
+                        <h3>Corporate Presentation</h3>
+                        <p>Comprehensive evaluation of a corporate presentation with notes on delivery performance and voice tone</p>
+                        <div class="sample-rating">
+                            <span class="rating-label">Overall Rating:</span>
+                            <span class="rating-stars">★★★☆☆</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="cta-container" data-aos="fade-up">
-                <a href="#" class="btn primary">Join as Teacher</a>
+            
+            <div class="cta-container" data-aos="zoom-in" data-aos-delay="400">
+                <a href="/Home/Presentations" class="btn primary">Try Analysis Yourself</a>
             </div>
         </section>
-
-        <section id="students" class="students-section">
-            <h2 class="section-title" data-aos="fade-up">For Students</h2>
-            <div class="students-features">
-                <div class="student-card" data-aos="flip-left">
-                    <div class="card-icon">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
-                    <h3>Interactive Learning</h3>
-                    <p>Engage with interactive content and quizzes</p>
-                </div>
                 <div class="student-card" data-aos="flip-up">
                     <div class="card-icon">
                         <i class="fas fa-chart-line"></i>
@@ -225,7 +303,7 @@
                 <h2 class="section-title">Get in Touch</h2>
                 <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
             </div>
-
+            <!-- Map Section -->
             <div class="contact-container">
                 <div class="contact-form">
                     <form>
@@ -276,7 +354,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>info@slidecraftpro.com</p>
+                            <p>info@slideai.com</p>
                         </div>
                     </div>
                     <div class="contact-social">
@@ -297,7 +375,15 @@
                         <i class="fas fa-map-marked-alt"></i>
                         <h3>Find Us on Map</h3>
                     </div>
-                    <div class="map-placeholder"></div>
+                    <div class="map-overlay">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.686860592495!2d34.40456609883512!3d31.477799086984962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14fd823a6f9e5d1d%3A0x8b45deb1a82e1ae0!2z2KzYp9mF2LnYqSDZgdmE2LPYt9mK2YY!5e0!3m2!1sen!2s!4v1735984034884!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="map-footer">
+                        <button class="direction-btn">
+                            <i class="fas fa-directions"></i>
+                            Get Directions
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -307,8 +393,8 @@
         <div class="footer-content">
             <div class="footer-sections">
                 <div class="footer-section">
-                    <h3><i class="fas fa-file-powerpoint"></i> SlideCraft Pro</h3>
-                    <p>The future of interactive presentations</p>
+                    <h3>Slide AI</h3>
+                    <p>Revolutionizing presentations with AI-powered tools and platforms.</p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -318,21 +404,21 @@
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="#">Home</a></li>
-                        <li><a href="/Home/Dashboard">Dashboard</a></li>
                         <li><a href="/Home/Presentations">Presentations</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="/Home/Dashboard">Dashboard</a></li>
+                        <li><a href="/Home/Login">Login</a></li>
+                        <li><a href="/Home/Register">Register</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                    <h3>Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Education Street, City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@slideai.com</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -345,7 +431,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 SlideCraft Pro. All rights reserved.</p>
+                <p>&copy; 2025 Slide AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
