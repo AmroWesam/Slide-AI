@@ -2,8 +2,8 @@
 
 /* General Styles */
 :root {
-    --primary-color: #6c5ce7;
-    --secondary-color: #a78bf7;
+    --primary-color: #4e43e0;
+    --secondary-color: #7b68ee;
     --accent-color: #ff6b6b;
     --text-color: #333;
     --light-text: #fff;
@@ -12,9 +12,9 @@
     --border-radius: 8px;
     --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
-    --logo-color-1: #6c5ce7;
+    --logo-color-1: #4e43e0;
     --logo-color-2: #ff6b6b;
-    --logo-color-3: #a78bf7;
+    --logo-color-3: #7b68ee;
 }
 
 /* Presentation Hero Section */
@@ -416,6 +416,10 @@
 
 .control-btn:hover, .control-btn.active {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.control-btn:hover, .control-btn.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .control-actions {
@@ -1292,4 +1296,644 @@ header {
 /* When in footer */
 footer .brand-logo {
     margin-bottom: 15px;
+}
+
+/* AI Evaluation Results Page Styles with Automatic Evaluation System */
+.ai-evaluation-body {
+    background-color: var(--light-bg);
+}
+
+.evaluation-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 40px 0;
+}
+
+.evaluation-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.evaluation-title h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.presentation-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+}
+
+.evaluation-summary {
+    padding: 40px 0;
+}
+
+.summary-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.overall-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.score-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.summary-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.detailed-analysis {
+    padding: 40px 0;
+    background-color: var(--light-bg);
+}
+
+.analysis-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background-color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.tab-panel h3 {
+    margin-bottom: 25px;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+.analysis-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.analysis-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h4 {
+    margin: 0;
+}
+
+.card-header i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.chart-container {
+    height: 200px;
+    position: relative;
+}
+
+.chart-container.large {
+    height: 300px;
+}
+
+.card-footer {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.accuracy-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.accuracy-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.accuracy-label {
+    width: 100px;
+    font-size: 0.9rem;
+}
+
+.accuracy-bar {
+    height: 8px;
+    background-color: var(--light-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.accuracy-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.accuracy-value {
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 40px;
+    text-align: right;
+}
+
+.voice-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.metric-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+}
+
+.metric-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(78, 67, 224, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.metric-data {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.metric-indicator {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.metric-indicator.excellent {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.metric-indicator.good {
+    background-color: #2196F3;
+    color: white;
+}
+
+.metric-indicator.warning {
+    background-color: #FFC107;
+    color: #333;
+}
+
+.metric-indicator.poor {
+    background-color: #F44336;
+    color: white;
+}
+
+.engagement-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.breakdown-value {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.key-moments {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.moment-item {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+}
+
+.moment-time {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-family: monospace;
+}
+
+.suggestions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.suggestion-card {
+    display: flex;
+    gap: 20px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.suggestion-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(78, 67, 224, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.suggestion-content h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.suggestion-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.action-buttons {
+    padding: 20px 0 60px;
+}
+
+.action-buttons .container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Detailed Evaluation System Styles */
+.evaluation-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    align-items: center;
+}
+
+.score-dashboard {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.final-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final-score-ring {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.score-progress {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.score-background {
+    fill: none;
+    stroke: #f0f0f0;
+    stroke-width: 8;
+}
+
+.score-value {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 2s ease-in-out;
+}
+
+.final-score-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#final-score {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.score-max {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.score-grade-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grade {
+    font-size: 3rem;
+    font-weight: bold;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.grade.grade-b {
+    background-color: #2196F3;
+}
+
+.grade.grade-c {
+    background-color: #FFC107;
+}
+
+.grade.grade-d {
+    background-color: #FF9800;
+}
+
+.grade.grade-f {
+    background-color: #F44336;
+}
+
+.grade-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.criteria-description {
+    flex: 1;
+    min-width: 300px;
+}
+
+.criteria-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.criterion-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.criterion-card:hover {
+    transform: translateY(-5px);
+}
+
+.criterion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.criterion-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.criterion-title i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    width: 30px;
+    text-align: center;
+}
+
+.criterion-title h4 {
+    margin: 0;
+}
+
+.criterion-score {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.criterion-max {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.criterion-meter {
+    margin-bottom: 15px;
+}
+
+.criterion-bar {
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.criterion-progress {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 1.5s ease-in-out;
+}
+
+.criterion-details p {
+    margin-bottom: 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.criterion-metrics {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.criterion-metrics li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.criterion-metrics li:last-child {
+    border-bottom: none;
+}
+
+.metric-name {
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: bold;
+}
+
+.metric-value.excellent {
+    color: #4CAF50;
+}
+
+.metric-value.very-good {
+    color: #2196F3;
+}
+
+.metric-value.good {
+    color: #FFC107;
+}
+
+.metric-value.fair {
+    color: #FF9800;
+}
+
+.metric-value.poor {
+    color: #F44336;
+}
+
+.evaluation-summary-box {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.evaluation-summary-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.evaluation-summary-box p {
+    line-height: 1.6;
+    color: var(--text-color);
 }

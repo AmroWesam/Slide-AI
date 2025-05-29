@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - SlideCraft Pro</title>
+    <title>Register - Slide AI</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,14 +17,14 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <h1><i class="fas fa-file-powerpoint"></i> SlideCraft Pro</h1>
+                <h1><i class="fas fa-file-powerpoint"></i> Slide AI</h1>
             </div>
             <ul class="nav-links">
                 <li><a href="/Home/Index">Home</a></li>
-                <li><a href="/Home/Presentations">Presentations</a></li>
-                <li><a href="/Home/Index#features">Features</a></li>
-                <li><a href="/Home/Index#teachers">Teachers</a></li>
-                <li><a href="/Home/Index#students">Students</a></li>
+                <li><a href="/Home/Presentations">Upload Presentation</a></li>
+                <li><a href="/Home/Feedback">Evaluation Results</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
                 <li><a href="/Home/Index#contact">Contact</a></li>
                 <li><a href="/Home/Login" class="login-link"><i class="fas fa-user"></i> Login</a></li>
             </ul>
@@ -39,19 +39,19 @@
             <div class="register-container">
                 <div class="section-header">
                     <h2 class="section-title">Create Account</h2>
-                    <p class="section-subtitle">Join SlideCraft Pro to create and deliver interactive presentations</p>
+                    <p class="section-subtitle">Join Slide AI to analyze and improve your presentations</p>
                 </div>
 
-                <div class="role-selector">
-                    <div class="role-option student-role active" data-role="student">
-                        <i class="fas fa-user-graduate"></i>
-                        <h3>Presenter</h3>
-                        <p>Join as a presenter to create and deliver presentations</p>
+                <div class="account-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Personalized Analysis</h3>
+                        <p>Get customized feedback to improve your presentation skills</p>
                     </div>
-                    <div class="role-option teacher-role" data-role="teacher">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <h3>Lecturer</h3>
-                        <p>Join as a lecturer to create courses</p>
+                    <div class="benefit-item">
+                        <i class="fas fa-history"></i>
+                        <h3>Track Progress</h3>
+                        <p>Monitor your improvement over time with detailed analytics</p>
                     </div>
                 </div>
 
@@ -82,29 +82,21 @@
                         </div>
                     </div>
 
-                    <!-- Student-specific fields -->
-                    <div class="student-fields role-fields">
+                    <!-- User profile fields -->
+                    <div class="user-profile-fields">
                         <div class="form-group">
-                            <label for="educationLevel">Education Level</label>
-                            <select id="educationLevel" name="educationLevel">
-                                <option value="">Select your education level</option>
-                                <option value="high_school">High School</option>
-                                <option value="bachelors">Bachelor's Degree</option>
-                                <option value="masters">Master's Degree</option>
-                                <option value="phd">PhD</option>
+                            <label for="profession">Profession/Industry</label>
+                            <input type="text" id="profession" name="profession" placeholder="E.g., Marketing, Technology, Education">
+                        </div>
+                        <div class="form-group">
+                            <label for="presentationGoals">Presentation Goals</label>
+                            <select id="presentationGoals" name="presentationGoals">
+                                <option value="">What are your main goals?</option>
+                                <option value="business">Business Presentations</option>
+                                <option value="academic">Academic Presentations</option>
+                                <option value="sales">Sales Pitches</option>
+                                <option value="general">General Improvement</option>
                             </select>
-                        </div>
-                    </div>
-
-                    <!-- Teacher-specific fields -->
-                    <div class="teacher-fields role-fields hidden">
-                        <div class="form-group">
-                            <label for="specialization">Specialization</label>
-                            <input type="text" id="specialization" name="specialization">
-                        </div>
-                        <div class="form-group">
-                            <label for="experience">Years of Experience</label>
-                            <input type="number" id="experience" name="experience" min="0">
                         </div>
                     </div>
 
@@ -137,7 +129,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 SlideCraft Pro. All rights reserved.</p>
+                <p>&copy; 2025 Slide AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
